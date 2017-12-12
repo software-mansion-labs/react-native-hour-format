@@ -8,5 +8,4 @@
 #import <React/RCTBridgeModule.h>
 
 @interface RNHourFormat : NSObject <RCTBridgeModule>
-
 @end
