@@ -8,17 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mironiasty/react-native-hour-format.git"
+    "url": "git+https://github.com/softwaremansion/react-native-hour-format.git"
   },
-  "keywords": [
-    "react-native"
-  ],
+  "keywords": ["react-native", "hour", "format", "am", "pm", "24"],
   "author": "Miron Pawlik",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mironiasty/react-native-hour-format/issues"
+    "url": "https://github.com/softwaremansion/react-native-hour-format/issues"
   },
-  "homepage": "https://github.com/mironiasty/react-native-hour-format#readme",
+  "homepage": "https://github.com/softwaremansion/react-native-hour-format#readme",
   "peerDependencies": {
     "react-native": "^0.43.4"
   }
