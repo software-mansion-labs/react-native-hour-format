@@ -1,6 +1,6 @@
 {
   "name": "react-native-hour-format",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Get time format used in user device",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/softwaremansion/react-native-hour-format.git"
   },
-  "keywords": ["react-native", "hour", "format", "am", "pm", "24"],
+  "keywords": [
+    "react-native",
+    "hour",
+    "format",
+    "am",
+    "pm",
+    "24"
+  ],
   "author": "Miron Pawlik",
   "license": "MIT",
   "bugs": {
@@ -18,6 +25,6 @@
   },
   "homepage": "https://github.com/softwaremansion/react-native-hour-format#readme",
   "peerDependencies": {
-    "react-native": "^0.43.4"
+    "react-native": ">=0.42.0"
   }
 }
