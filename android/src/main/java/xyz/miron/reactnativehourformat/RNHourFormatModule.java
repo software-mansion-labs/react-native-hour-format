@@ -4,19 +4,21 @@ package xyz.miron.reactnativehourformat;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import android.text.format.DateFormat;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Promise;
-import android.text.format.DateFormat;
+import java.util.Map;
+import java.util.HashMap;
 
 public class RNHourFormatModule extends ReactContextBaseJavaModule {
 
-  private final ReactApplicationContext reactContext;
+  private static final String LOCALE = "LOCALE";
+  private static final String HOUR_FORMAT = "HOUR_FORMAT";
+
 
   public RNHourFormatModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.reactContext = reactContext;
   }
 
   @Override
@@ -24,17 +26,20 @@ public class RNHourFormatModule extends ReactContextBaseJavaModule {
     return "RNHourFormat";
   }
 
-  @ReactMethod
-  public void getLocale(Promise promise) {
-    promise.resolve(getPreferences().getString("locale_override", null));
+  @Override
+  public Map<String, Object> getConstants() {
+    final Map<String, Object> constants = new HashMap<>();
+    constants.put(LOCALE, this.getLocale());
+    constants.put(HOUR_FORMAT, this.getHourFormat());
+    return constants;
   }
 
-  @ReactMethod
-  public void getHourFormat(Promise promise) {
-    promise.resolve(DateFormat.is24HourFormat(getReactApplicationContext()) ? "24" : "12");
+  private String getLocale() {
+    SharedPreferences preferences = getReactApplicationContext().getSharedPreferences("react-native", Context.MODE_PRIVATE);
+    return preferences.getString("locale_override", null);
   }
 
-  private SharedPreferences getPreferences() {
-    return getReactApplicationContext().getSharedPreferences("react-native", Context.MODE_PRIVATE);
+  private String getHourFormat() {
+    return DateFormat.is24HourFormat(getReactApplicationContext()) ? "24" : "12";
   }
 }

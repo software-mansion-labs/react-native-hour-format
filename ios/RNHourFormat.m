@@ -9,34 +9,41 @@
 
 @implementation RNHourFormat
 
-RCT_EXPORT_MODULE();
 
-
-RCT_REMAP_METHOD(getLocale,
-                  resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
+- (dispatch_queue_t)methodQueue
 {
-    NSArray *locales = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    if (locales == nil) { reject(@"no_locales", @"No locales", nil); }
-    if ([locales count] == 0) { reject(@"no_locales", @"No locales", nil); }
-    
-    NSString* currentLocale = locales[0];
-    resolve(currentLocale);
+    return dispatch_get_main_queue();
 }
 
-RCT_REMAP_METHOD(getHourFormat,
-                  hourFormatResolve:(RCTPromiseResolveBlock)resolve
-                  hourFormatReject:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_MODULE();
+
+- (NSString *)getLocale
+{
+    NSArray *locales = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+    if (locales == nil) { return @""; }
+    if ([locales count] == 0) { return @""; }
+    
+    NSString* currentLocale = locales[0];
+    return currentLocale;
+}
+
+- (NSString *)getHourFormat
 {
     // https://stackoverflow.com/a/11660380
     NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     
     NSRange containsA = [formatStringForHours rangeOfString:@"a"];
     if (containsA.location == NSNotFound) {
-        resolve(@"24");
+        return @"24";
     } else{
-        resolve(@"12");
+        return @"12";
     };
+}
+
+- (NSDictionary *)constantsToExport
+{
+    return @{ @"LOCALE" : ([self getLocale]),
+              @"HOUR_FORMAT" : ([self getHourFormat]) };
 }
 
 @end
