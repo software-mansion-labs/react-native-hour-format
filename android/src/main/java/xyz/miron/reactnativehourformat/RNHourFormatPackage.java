@@ -17,7 +17,6 @@ public class RNHourFormatPackage implements ReactPackage {
       return Arrays.<NativeModule>asList(new RNHourFormatModule(reactContext));
     }
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
       return Collections.emptyList();
     }
