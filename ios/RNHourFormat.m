@@ -46,4 +46,9 @@ RCT_EXPORT_MODULE();
               @"HOUR_FORMAT" : ([self getHourFormat]) };
 }
 
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+} 
+
 @end
